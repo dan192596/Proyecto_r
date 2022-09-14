@@ -70,7 +70,35 @@ head(monthly)
 Con los datos cargados, ahora podemos ver la proporcion de muertes a lo largo del tiempo.
 5.1 Haga una grafica lineal para proportion_deaths por fecha para el data frame montly usando ggplot.
 ```{r}
-ggplot(monthly, aes(x = date, y = proportion_deaths))+
+
+#Se utilizo funcion group, recomendada por el ide
+ggplot(monthly, aes(x = date, y = proportion_deaths, group=1))+
   geom_line()
+```
+
+5.2 Utilice la funcion labs para dar el eje x y al eje y una estetica a las etiquetas.
+```{r}
+ggplot(monthly, aes(x = date, y = proportion_deaths, group=1))+
+  geom_line() +
+  labs(x="fecha", y="proporcion de muertes")
+  
+```
+
+5.3 Use group_by y summarise para encontrar la media por año y guardelo en el dataset death_by_year
+```{r}
+death_by_year <- monthly %>%
+  mutate(date = substring(date, 1,4))%>%
+  group_by(date) %>%
+  summarize(death_year = mean(deaths))
+
+death_by_year
+```
+
+5.4 Utilice el conjunto de datos death_by_year para crear un grafico de barras que muestre la media en cada año
+```{r}
+death_by_year
+
+ggplot(death_by_year, aes(x=date, y = death_year)) +
+  geom_col()
 ```
 
