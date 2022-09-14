@@ -34,10 +34,43 @@ print(yearly)
  3.1 Utilice ggplot para hacer una grafica lineal de proportion_deaths por año(columna year) con una linea por clinica.
  
 ```{r}
-ggplot(yearly, aes(x = year, y = proportion_deaths ))+
+ggplot(yearly, aes(x = year, y = proportion_deaths, fill= clinic ))+
   geom_line()
 
 ```
  
  
  3.2 Las líneas deben tener colores distintos.
+ 
+```{r}
+ggplot(yearly, aes(x = year, y = proportion_deaths, color=clinic ))+
+  geom_line()
+```
+ 
+ 4. Comienza el lavado de manos
+ 4.1 Cargue los datos mensuales de la clinica 1 para ver si el lavado de manos tuvo algun efecto para esto lea el archivo deaths_clinic_1.csv y asignelo a la variable monthly
+```{r}
+monthly <- read.csv("deaths_clinic_1.csv", header = TRUE, sep = ",", dec = ".", fill = TRUE, encoding = "UTF-8")
+
+print(monthly)
+```
+
+4.2 Agregue la columna proportion_deaths a montly, esta nueva columna se calculara como la proporcion de muertes por numero de nacimientos
+```{r}
+monthly <- monthly %>%
+  mutate(proportion_deaths=deaths/births)
+```
+
+4.3 Imprima las primeras filas de monthly usando la funcion head()
+```{r}
+head(monthly)
+```
+
+5. El efecto del lavado de manos
+Con los datos cargados, ahora podemos ver la proporcion de muertes a lo largo del tiempo.
+5.1 Haga una grafica lineal para proportion_deaths por fecha para el data frame montly usando ggplot.
+```{r}
+ggplot(monthly, aes(x = date, y = proportion_deaths))+
+  geom_line()
+```
+
