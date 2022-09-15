@@ -102,3 +102,20 @@ ggplot(death_by_year, aes(x=date, y = death_year)) +
   geom_col()
 ```
 
+6.1 Agregue una columna True/false a montly llamado handwashing_started que sera ture a partir del a;o en que se impuso el lavado de a;o 
+
+```{r}
+
+monthly <- monthly %>%
+  mutate(handwashing_started = date>= "1847-01-01")
+
+monthly
+```
+
+6.2 Haga una grafica lineal de proportion_deaths por fecha para el dataframe monthly usando ggplot. Haga que el color de la linea depende de handashing_started
+
+```{r}
+ggplot(monthly, aes(x=date, y = proportion_deaths, group=1, color=handwashing_started))+
+  geom_line()
+```
+
