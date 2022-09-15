@@ -136,4 +136,9 @@ month_summary <-monthly %>%
 print(month_summary)
 ```
 
-8.
+8. Analisis estadistico de los datos de lavado de manos
+
+```{r}
+t.test(proportion_deaths ~ handwashing_started, data = monthly)
+```
+
