@@ -119,3 +119,21 @@ ggplot(monthly, aes(x=date, y = proportion_deaths, group=1, color=handwashing_st
   geom_line()
 ```
 
+7.1 Utilice group_by y summarize para calcular el promedio de porportion_deaths antes y despues de que se impousiera el lavado de manos
+
+```{r}
+monthly %>%
+  group_by(handwashing_started) %>%
+  summarize(mean_proportion_deahts= mean(proportion_deaths))
+```
+
+7.2 Asigne el resultado en la variable month_summary e imprimala
+```{r}
+month_summary <-monthly %>%
+  group_by(handwashing_started) %>%
+  summarize(mean_proportion_deahts= mean(proportion_deaths))
+
+print(month_summary)
+```
+
+8.
